@@ -160,6 +160,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed 
     <script src="js/bootstrap.min.js"></script>-->
    
+    <script src="jquery.fireworks.js"></script>
 
     <script >
       var i=0;
@@ -176,79 +177,87 @@
         const height = mask.innerHeight();
         const temp=2;
         const width = mask.innerWidth();
-        
+        const doc=$(document);
+        const cont=$(".controls");
+        const h=cont.height();
+        const w=doc.width();
+        const top=h;
+        const left=(w/2)-250;
+        const right=(w/2)+250;
+        const down=h+500;
+       // const o=offset()     
         let offset = mask.offset();
         switch (dir) {
-          case 'up':if((offset.top - width-temp)>100){
+          case 'up':if((offset.top - width-temp)>top){
             offset.top = offset.top - height-temp;
 
             $('.m1').toggleClass('m2');
-            if((i%2)==0)
-            {
-                $('.m1').removeClass("shake animated")
-                $('.m1').addClass("rubberBand animated")
-            }
-            else
-            {
-                $('.m1').removeClass("rubberBand animated")
-                $('.m1').addClass("shake animated")
-            }
+            // if((i%2)==0)
+            // {
+            //     $('.m1').removeClass("shake animated")
+            //     $('.m1').addClass("rubberBand animated")
+            // }
+            // else
+            // {
+            //     $('.m1').removeClass("rubberBand animated")
+            //     $('.m1').addClass("shake animated")
+            // }
              //$('.m1').toggleClass('rubberBand animated');
              i++;
              //alert(i);
           }
             break;
-          case 'left':if((offset.left - width-temp)>500){
+          case 'left':if((offset.left - width-temp)>left){
             offset.left = offset.left - width-temp;
             $('.m1').toggleClass('m2'); 
             //$('.m1').toggleClass('rubberBand animated');
-             if((i%2)==0)
-            {
-                $('.m1').removeClass("shake animated")
-                $('.m1').addClass("rubberBand animated")
-            }
-            else
-            {
-                $('.m1').removeClass("rubberBand animated")
-                $('.m1').addClass("shake animated")
-            }
-             i++;
+             // if((i%2)==0)
+            // {
+            //     $('.m1').removeClass("shake animated")
+            //     $('.m1').addClass("rubberBand animated")
+            // }
+            // else
+            // {
+            //     $('.m1').removeClass("rubberBand animated")
+            //     $('.m1').addClass("shake animated")
+            // }
+            //  i++;
              //alert(i);
           }
             break;
-          case 'right': if((offset.left + width+temp)<1000){
+          case 'right': if((offset.left + width+temp)<right){
             offset.left = offset.left + width+temp;
           $('.m1').toggleClass('m2'); 
           //$('.m1').toggleClass('rubberBand animated');
-           if((i%2)==0)
-            {
-                $('.m1').removeClass("shake animated")
-                $('.m1').addClass("rubberBand animated")
-            }
-            else
-            {
-                $('.m1').removeClass("rubberBand animated")
-                $('.m1').addClass("shake animated")
-            }
-           i++;
+           // if((i%2)==0)
+           //  {
+           //      $('.m1').removeClass("shake animated")
+           //      $('.m1').addClass("rubberBand animated")
+           //  }
+           //  else
+           //  {
+           //      $('.m1').removeClass("rubberBand animated")
+           //      $('.m1').addClass("shake animated")
+           //  }
+           // i++;
             // alert(i);
         }
             break;
-          case 'down':if((offset.top + height+temp)<600){
+          case 'down':if((offset.top + height+temp)<down){
             offset.top = offset.top + height+temp;
             $('.m1').toggleClass('m2'); 
             //$('.m1').toggleClass('rubberBand animated');
-             if((i%2)==0)
-            {
-                $('.m1').removeClass("shake animated")
-                $('.m1').addClass("rubberBand animated")
-            }
-            else
-            {
-                $('.m1').removeClass("rubberBand animated")
-                $('.m1').addClass("shake animated")
-            }
-             i++;
+            //  if((i%2)==0)
+            // {
+            //     $('.m1').removeClass("shake animated")
+            //     $('.m1').addClass("rubberBand animated")
+            // }
+            // else
+            // {
+            //     $('.m1').removeClass("rubberBand animated")
+            //     $('.m1').addClass("shake animated")
+            // }
+            //  i++;
              //alert(i);
           }
             break;
@@ -268,29 +277,38 @@
         const height = mask.innerHeight();
         const temp=2;
         const width = mask.innerWidth();
-        
+        const doc=$(document);
+        const cont=$(".controls");
+        const h=cont.height();
+        const w=doc.width();
+        const top=h;
+        const left=(w/2)-250;
+        const right=(w/2)+250;
+        const down=h+500;
+
+       
         let offset = mask.offset();
         switch (e.which) {
-          case  38:if((offset.top - width-temp)>100){
+          case  38:if((offset.top - width-temp)>top){
             offset.top = offset.top - height-temp;
             
 
 
           }
             break;
-          case 37:if((offset.left - width-temp)>500){
+          case 37:if((offset.left - width-temp)>left){
                   offset.left = offset.left - width-temp;
                   $('.m1').toggleClass('m2'); 
                  
                 }
             break;
-          case 39: if((offset.left + width+temp)<1000){
+          case 39: if((offset.left + width+temp)<right){
                         offset.left = offset.left + width+temp;
                       $('.m1').toggleClass('m2'); 
                       
                     }
             break;
-          case 40:if((offset.top + height+temp)<600){
+          case 40:if((offset.top + height+temp)<down){
                         offset.top = offset.top + height+temp;
                         $('.m1').toggleClass('m2'); 
                         
