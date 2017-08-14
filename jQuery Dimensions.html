@@ -277,38 +277,40 @@
         const height = mask.innerHeight();
         const temp=2;
         const width = mask.innerWidth();
-        const doc=$(document);
-        const cont=$(".controls");
-        const h=cont.height();
-        const w=doc.width();
-        const top=h;
-        const left=(w/2)-250;
-        const right=(w/2)+250;
-        const down=h+500;
+        const wrap=$('.maskWrapper');
+
+        // const doc=$(document);
+        // const cont=$(".controls");
+        // const h=cont.height();
+        // const w=doc.width();
+        // const top=h;
+        // const left=(w/2)-250;
+        // const right=(w/2)+250;
+        // const down=h+500;
 
        
         let offset = mask.offset();
         switch (e.which) {
-          case  38:if((offset.top - width-temp)>top){
+          case  38:if((offset.top - width-temp)>wrap.offset().top){
             offset.top = offset.top - height-temp;
             
 
 
           }
             break;
-          case 37:if((offset.left - width-temp)>left){
+          case 37:if((offset.left - width-temp)>wrap.offset().left){
                   offset.left = offset.left - width-temp;
                   $('.m1').toggleClass('m2'); 
                  
                 }
             break;
-          case 39: if((offset.left + width+temp)<right){
+          case 39: if((offset.left + width+temp)<((wrap.offset().left)+(width*5))){
                         offset.left = offset.left + width+temp;
                       $('.m1').toggleClass('m2'); 
                       
                     }
             break;
-          case 40:if((offset.top + height+temp)<down){
+          case 40:if((offset.top + height+temp)<((wrap.offset().top)+(height*5))){
                         offset.top = offset.top + height+temp;
                         $('.m1').toggleClass('m2'); 
                         
