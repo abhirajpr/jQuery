@@ -333,11 +333,24 @@
             'font-size' : '45px'
             
         })
+
+
         popup.attr("id","a");
-        popup.text("Game Completed");
-        popup.attr("class","jackInTheBox animated");
-        $('body').append(popup);
+
+        var val2= $(".safe.new").length;
+        if(val1 == val2)
+        {
+          popup.text("Game Completed");
+          popup.attr("class","jackInTheBox animated");
+          $('#a').fireworks();
+        }
+        else
+        {
+          popup.text("Cheated!!!!");
+          popup.attr("class","jackInTheBox animated");
+        }
         $('#a').fireworks();
+        $('body').append(popup);
        // $('.a').append("<button id='btn1' >Refresh</button>");
 
     });
@@ -352,6 +365,7 @@
 
             $("#btn").click(function(){
                 $('#count').text("0");
+                $('.safe').removeClass("new")
                 $('.safe').css("background-color","");
                 $('.glyphicon').removeClass("bounce animated");
             })
