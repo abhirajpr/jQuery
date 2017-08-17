@@ -89,7 +89,7 @@ end
 delete from [employee].[dbo].[details] where ID=4
 ------------------------------------------------------------------------------------------------------
 
-DATE Function
+DATE Functions
 ------------------------------------------------------------------------------------------------------
 
 select isdate('2017-08-17');
@@ -108,5 +108,52 @@ select datepart(nanosecond,'12:10:15.123456789') as  month
 select dateadd(year,22,'1995-11-02 10:10:10.100') as  new_date
 
 select datediff(day,'1995-11-02' ,'2017-08-17') as difference
+
+-------------------------------------------------------------------------------------------------------
+
+String Functions
+-------------------------------------------------------------------------------------------------------
+select top 5 Name from Production.Product order by ProductID
+
+select top 5 Left(Name,5) from Production.Product order by ProductID
+select top 5 right(Name,5) from Production.Product order by ProductID
+
+--char index
+
+declare @docs1 varchar(100);
+select @docs1 = 'happy new year' ;
+ select CHARINDEX('new',@docs1);
+
+ declare @docs2 varchar(100);
+select @docs2 = 'happy new year' ;
+ select CHARINDEX('New',@docs2 collate Latin1_General_CS_AS)
+
+
+ declare @docs3 varchar(100);
+select @docs3 = 'happy new year' ;
+ select CHARINDEX('new',@docs3 collate Latin1_General_CI_AS)
+
+ --substring
+
+ select * from sys.databases where database_id<5
+ select name, substring(name,1,1) as initial,SUBSTRING(name,3,2) as three  from sys.databases where database_id<5
+
+ --replicate
+
+ select top 5 name, REPLICATE(0,5)+ProductLine from Production.Product where ProductLine='T' order by name
+
+ --patindex
+
+ select PATINDEX('%pp%','Happy New Year');
+  select PATINDEX('%p_y%','Happy New Year');
+
+--replace
+
+select replace('abcdefgabc','abc','xxx')
+
+--stuff
+
+ select stuff('abcefghijk',4,3,'xyz')
+
 
 -------------------------------------------------------------------------------------------------------
