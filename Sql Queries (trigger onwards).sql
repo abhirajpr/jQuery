@@ -169,3 +169,80 @@ EXCEPTION HANDLING
   BEGIN CATCH
 	PRINT 'ERROR'
   END CATCH	
+
+ --=================================
+ EXCEPTION HANDLING using Procedure
+ --=================================
+ IF OBJECT_ID('LastYearSales','U') is not null
+drop table LastYearSales
+go
+
+--------------------------------------------------------------------------------------------
+
+select BusinessEntityID as SalesPersonID,
+FirstName + ' '+LastName as FullName,
+SalesLastYear
+into
+	LastYearSales
+from
+	Sales.vSalesPerson
+where
+	SalesLastYear>0;
+go
+--------------------------------------------------------------------------------------------
+alter table LastYearSales
+add constraint checkConstraint check (SalesLastYear >= 0)
+go
+
+--------------------------------------------------------------------------------------------
+
+IF OBJECT_ID('UpadateSales') is not null
+drop procedure UpadateSales
+go
+
+--------------------------------------------------------------------------------------------
+
+create procedure UpadateSales
+	@SalesPersonID int,
+	@SalesAmt money=0
+as
+begin
+	begin try
+		begin transaction;
+			update LastYearSales
+			set SalesLastYear=SalesLastYear+@SalesAmt
+			where SalesPersonID=@SalesPersonID;
+		commit transaction;
+	end try
+	begin catch
+		if @@TRANCOUNT>0
+		rollback transaction;
+
+		declare @ErrorNumber int = Error_Number();
+		declare @ErrorLine int = Error_Line();
+		--declare @ErrorMessage nvarchar(4000) = Error_Message();
+		--declare @ErrorSeverity int = Error_Severity();
+		--declare @ErrorState int = Error_State();
+
+		print 'Actual Error Number : ' + cast(@ErrorNumber as varchar(10));
+		print 'Actual Line Number : ' + cast(@ErrorLine as varchar(10));
+
+		--RAISERROR(@ErrorMessage,@ErrorSeverity,@ErrorState);
+		throw;
+	end catch
+end;
+go
+
+--------------------------------------------------------------------------------------------
+
+select SalesPersonID,FullName,SalesLastYear from LastYearSales  where SalesPersonID=288
+
+exec UpadateSales 288,2000000
+
+exec UpadateSales 288,-4000000
+
+---------------------------------------------------------------------------------------------------------------
+
+--***********************************************************************************************************--
+
+----------------------------------------------------------------------------------------------------------------
