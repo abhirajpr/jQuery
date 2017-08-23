@@ -157,3 +157,15 @@ select replace('abcdefgabc','abc','xxx')
 
 
 -------------------------------------------------------------------------------------------------------
+EXCEPTION HANDLING
+-------------------------------------------------------------------------------------------------------
+  insert into [employee].[dbo].[details](name,phone) values(25,'kjgh')
+  select @@ERROR
+  
+
+  BEGIN TRY
+	insert into [employee].[dbo].[details](name,phone) values(25,'kjgh')
+  END TRY
+  BEGIN CATCH
+	PRINT 'ERROR'
+  END CATCH	
