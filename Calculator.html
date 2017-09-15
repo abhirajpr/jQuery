@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Jquery Calculator</title>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <style>
+    .wrapper{
+
+      height: 360px;
+      width:500px;
+      border: solid 2px;
+      margin:auto;
+      padding:5px;
+    }
+    .display{
+      width:500px;
+      height:50px;
+      text-orientation: sideways;
+    }
+    .answer{
+      width:480px;
+      height:50px;
+      border: solid 1px;
+      margin:auto;
+      font-size: 20px;
+      
+    }
+    button{
+      width:110px;
+      height:52px;
+      float: left;
+      padding: 5px;
+      margin:5px;
+    }
+    span{
+      
+    }
+    #wrap{
+      margin: auto;
+    }
+    #history{
+      width:220px;
+    }
+
+    </style>
+
+  </head>
+  <body class="container">
+
+
+  <div class="wrapper">
+      <div class="display">
+      <span id="first">
+
+      </span>
+      <span id="second">
+      
+      </span >
+      <span id="third">
+      
+      </span>
+
+      </div>
+      <div class="answer">
+
+      </div>
+      <div >
+          <button id="7">7</button>
+          <button id="8">8</button>
+          <button id="9">9</button>
+          <button id="divide">/</button>
+      </div>
+       <div >
+          <button id="4">4</button>
+          <button id="5">5</button>
+          <button id="6">6</button>
+          <button id="mult">*</button>
+      </div>
+       <div>
+          <button id="1">1</button>
+          <button id="2">2</button>
+          <button id="3">3</button>
+          <button id="minus">-</button>
+      </div>
+       <div>
+          <button id="0">0</button>
+          <button id="dot">.</button>
+          <button id="equal">=</button>
+          <button id="plus">+</button>
+      </div>
+      
+      <div id="wrap">
+
+      <button id="clear">Clear</button>
+      <button id="history">History</button>
+      <button id="clearhistory">Clear Hostory</button>
+      
+
+      <div id="print"></div>
+      </div>
+      </br>
+      </div>
+      </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="calculator.js"></script> -->
+    <script>
+    var number='';
+    var number1='';
+    var flag=0;
+    var queue=[];
+    var his=[];
+    var sum=0;
+    var j=0,k=0;
+      $(document).ready(function(){
+        $("#7").click(function(){
+          number+='7';
+          number1+='7';
+          $("#first").text(number);
+        })
+        $("#8").click(function(){
+          number+='8';
+          number1+='8';
+          $("#first").text(number);
+        })
+        $("#9").click(function(){
+          number+='9';
+          number1+='9';
+          $("#first").text(number);
+        })
+        $("#5").click(function(){
+          number+='5';
+          number1+='5';
+          $("#first").text(number);
+        })
+        $("#6").click(function(){
+          number+='6';
+          number1+='5';
+          $("#first").text(number);
+        })
+        $("#4").click(function(){
+          number+='4';
+          number1+='4';
+          $("#first").text(number);
+        })
+        $("#3").click(function(){
+          number+='3';
+          number1+='3';
+          $("#first").text(number);
+        })
+        $("#2").click(function(){
+          number+='2';
+          number1+='2';
+          $("#first").text(number);
+         })
+        $("#1").click(function(){
+          number+='1';
+          number1+='1';
+          $("#first").text(number);
+         })
+        $("#0").click(function(){
+          number+='0';
+          number1+='0';
+          $("#first").text(number);
+         })
+        $("#plus").click(function(){
+          queue[j]=number1;
+          j++;
+          queue[j]='+';
+          j++;
+          number1='';
+          number+='+';
+          flag=1;
+          $("#first").text(number);
+         })
+        $("#minus").click(function(){
+          number+='-';
+          flag=2;
+          queue[j]=number1;
+          j++;
+          queue[j]='-';
+          j++;
+          number1='';
+          $("#first").text(number);
+         })
+        $("#dot").click(function(){
+          number+='.';
+          flag=2;
+          queue[j]=number1;
+          j++;
+          queue[j]='.';
+          j++;
+          number1='';
+          $("#first").text(number);
+         })
+         $("#mult").click(function(){
+          number+='*';
+          flag=3;
+          queue[j]=number1;
+          j++;
+          queue[j]='*';
+          j++;
+          number1='';
+          $("#first").text(number);
+         })
+          $("#divide").click(function(){
+          number+='/';
+           queue[j]=number1;
+          j++;
+          queue[j]='/';
+          j++;
+          number1='';
+          flag=4;
+          $("#first").text(number);
+         })
+         $("#history").click(function(){
+            let item=$('<span />');
+            for(var i=0;his[i]!=null;i++){
+              item.text("=>"+his[i]+"  ");
+            }
+
+            $("#print").append(item);
+
+
+         })
+         $("#clearhistory").click(function(){
+          location.reload();
+         })
+
+
+
+          $("#clear").click(function(){
+
+              his[k]=number+'='+sum;
+              k++;
+               // location.reload();
+              his[k]=number1;
+              k++;
+              number='';
+              number1='';
+              
+              for(var i=0;queue[i]!=null;i++){
+                queue[i]=null;
+              }
+              sum=0;
+              j=0;
+
+              $("#first").text('');
+              $(".answer").text(' ');
+
+
+
+          })
+         $("#equal").click(function(){
+          
+          
+         
+          queue[j]=number1;
+          number1='';
+          j++;
+          sum=parseInt(queue[0]);
+          for(var i=0;queue[i]!=null;i++){
+                if(queue[i]=='+')
+                {
+                  sum+=parseInt(queue[i+1]);
+
+                }
+                if(queue[i]=='-')
+                {
+                  sum-=parseInt(queue[i+1]);
+                }
+                if(queue[i]=='*')
+                {
+                  sum*=parseInt(queue[i+1]);
+                }
+                if(queue[i]=='/')
+                {
+                  sum/=parseInt(queue[i+1]);
+                }
+                // if(queue[i]=='.')
+                // {
+                //   queue[i-1]=(queue[i-1])+'.'+(queue[i+1])
+                // }
+
+            }
+            his[k]=number+'='+sum;
+             k++;
+            number1='';
+
+           $(".answer").text(sum);
+         })
+
+
+        
+       
+
+
+
+
+
+      })
+    </script>
+
+  </body>
+</html>
