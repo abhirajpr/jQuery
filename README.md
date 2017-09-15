@@ -1,5 +1,7 @@
 # jQuery
 JQuery Study
+Calculator
+https://abhirajpr.github.io/jQuery/Calculator.html
 
 Game
 https://abhirajpr.github.io/jQuery/game.html
